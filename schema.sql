@@ -1,0 +1,33 @@
+CREATE TABLE customers
+( 
+CUSTOMER_ID INT PRIMARY KEY AUTO_INCREMENT,
+CUSTOMERNAME VARCHAR(100),
+EMAIL_ID VARCHAR(100),
+PHONE_NO VARCHAR (10) unique,
+CITYNAME VARCHAR(100),
+SIGNUP_DATE DATE NOT NULL  
+);
+CREATE TABLE PRODUCTS(
+PRODUCT_ID INT PRIMARY KEY auto_increment,
+PRODUCTNAME varchar(100),CATEGORY varchar(100),PRICE DECIMAL(10,2),
+  STOCK_QUANTITY INT,BRANDNAME varchar(50));
+create table ORDERS (
+ORDER_ID INT PRIMARY KEY AUTO_INCREMENT,
+CUSTOMER_ID INT,
+PRODUCT_ID INT,
+ORDER_DATE DATE NOT NULL,
+QUANTITY INT,
+TOTAL_AMOUNT DECIMAL(10,2),
+FOREIGN KEY (CUSTOMER_ID) REFERENCES customers(CUSTOMER_ID),
+FOREIGN KEY (PRODUCT_ID) REFERENCES products(PRODUCT_ID)
+);
+create table ORDERS_ITEMS (ORDER_ITEM_ID INT auto_increment PRIMARY KEY ,
+ORDER_ID INT, PRODUCT_ID INT, QUANTITY INT , PRICE DECIMAL (10,2)
+);
+create table payment (
+payment_id int auto_increment primary key,
+order_id int,payment_date date,
+payment_methods varchar(50),
+payment_status varchar(50),amount decimal(10,2),
+foreign key (order_id) references orders(order_id)
+);
